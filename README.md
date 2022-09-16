@@ -1,6 +1,6 @@
 # latihan_firebase1
 
-A new Flutter project.
+kalian bisa melihat di tiap commit nya
 
 ## Getting Started
 
