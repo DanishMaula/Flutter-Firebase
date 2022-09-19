@@ -28,28 +28,27 @@ class AuthController extends GetxController {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
         Get.defaultDialog(
-        title: 'Terjadi kesalahan',
-        middleText: 'Password sangat lemah',
-        onConfirm: () {
-          Get.back();
-          Get.back();
-        },
-        textConfirm: 'OK',
-        confirmTextColor: Colors.white,
-      );
+          title: 'Terjadi kesalahan',
+          middleText: 'Password sangat lemah',
+          onConfirm: () {
+            Get.back();
+            Get.back();
+          },
+          textConfirm: 'OK',
+          confirmTextColor: Colors.white,
+        );
       } else if (e.code == 'email-already-in-use') {
         print('the account already exists for that email.');
         Get.defaultDialog(
-        title: 'Terjadi Kesalahan',
-        middleText: 'Email sudah terdaftar',
-        onConfirm: () {
-          Get.back();
-          Get.back();
-        },
-        textConfirm: 'OK',
-        confirmTextColor: Colors.white,
-      );
-        
+          title: 'Terjadi Kesalahan',
+          middleText: 'Email sudah terdaftar',
+          onConfirm: () {
+            Get.back();
+            Get.back();
+          },
+          textConfirm: 'OK',
+          confirmTextColor: Colors.white,
+        );
       }
     }
   }
@@ -63,8 +62,8 @@ class AuthController extends GetxController {
       } else {
         Get.defaultDialog(
           title: 'Email belum terverifikasi',
-          middleText: 
-          'Anda memerlukan verifikasi email untuk masuk, apakah anda ingin mengirim ulang verifikasi email?',
+          middleText:
+              'Anda memerlukan verifikasi email untuk masuk, apakah anda ingin mengirim ulang verifikasi email?',
           textConfirm: 'Kirim Ulang',
           confirmTextColor: Colors.white,
           onConfirm: () async {
@@ -86,7 +85,7 @@ class AuthController extends GetxController {
           textConfirm: 'OK',
           confirmTextColor: Colors.white,
           onConfirm: () {
-            Get.back(); 
+            Get.back();
           },
         );
       } else if (e.code == 'wrong-password') {
@@ -99,7 +98,6 @@ class AuthController extends GetxController {
           onConfirm: () {
             Get.back();
           },
-          
         );
       }
     }
@@ -109,4 +107,34 @@ class AuthController extends GetxController {
     await FirebaseAuth.instance.signOut();
     Get.offAllNamed(Routes.LOGIN);
   }
+
+  void resetPassword(String email) async {
+    if (email != "" && GetUtils.isEmail(email)) {
+      try {
+        auth.sendPasswordResetEmail(email: email);
+        Get.defaultDialog(
+          title: 'Success!',
+          middleText: 'We have sent you a reset password to $email',
+          onConfirm: () {
+            Get.back(); // close dialog
+            Get.back(); // go to login
+          },
+          textConfirm: "Ok",
+        );
+      } catch (e) {
+        Get.defaultDialog(
+          title: 'Error Occured',
+          middleText: 'Cant reset password',
+        );
+      }
+    } else {
+      Get.defaultDialog(
+        title: 'Error Occured',
+        middleText: 'Please enter your email',
+      );
+    }
+  }
+
+
+
 }

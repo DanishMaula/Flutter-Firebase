@@ -7,7 +7,6 @@ import '../../../routes/app_pages.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
-
   final authC = Get.find<AuthController>();
 
   @override
@@ -23,7 +22,7 @@ class LoginView extends GetView<LoginController> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextField(
-                controller:controller.emailC,
+                controller: controller.emailC,
                 decoration: InputDecoration(
                   hintText: 'Email',
                 ),
@@ -37,14 +36,18 @@ class LoginView extends GetView<LoginController> {
               SizedBox(height: 10),
               Align(
                 alignment: Alignment.centerRight,
-                child:
-                    TextButton(onPressed: () {}, child: Text('Reset Password')),
+                child: TextButton(
+                    onPressed: () {
+                      Get.toNamed(Routes.RESET_PASSWORD);
+                    },
+                    child: Text('Reset Password')),
               ),
               SizedBox(
                 height: 10,
               ),
               ElevatedButton(
-                  onPressed: () => authC.login(controller.emailC.text, controller.passwordC.text),
+                  onPressed: () => authC.login(
+                      controller.emailC.text, controller.passwordC.text),
                   child: Text('Login')),
               SizedBox(
                 height: 10,

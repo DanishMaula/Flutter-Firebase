@@ -1,9 +1,13 @@
 import 'package:get/get.dart';
 
+import 'package:latihan_firebase1/app/modules/add_page/bindings/add_page_binding.dart';
+import 'package:latihan_firebase1/app/modules/add_page/views/add_page_view.dart';
 import 'package:latihan_firebase1/app/modules/home/bindings/home_binding.dart';
 import 'package:latihan_firebase1/app/modules/home/views/home_view.dart';
 import 'package:latihan_firebase1/app/modules/login/bindings/login_binding.dart';
 import 'package:latihan_firebase1/app/modules/login/views/login_view.dart';
+import 'package:latihan_firebase1/app/modules/reset_password/bindings/reset_password_binding.dart';
+import 'package:latihan_firebase1/app/modules/reset_password/views/reset_password_view.dart';
 import 'package:latihan_firebase1/app/modules/signup/bindings/signup_binding.dart';
 import 'package:latihan_firebase1/app/modules/signup/views/signup_view.dart';
 
@@ -29,6 +33,16 @@ class AppPages {
       name: _Paths.SIGNUP,
       page: () => SignupView(),
       binding: SignupBinding(),
+    ),
+    GetPage(
+      name: _Paths.RESET_PASSWORD,
+      page: () => ResetPasswordView(),
+      binding: ResetPasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADD_PAGE,
+      page: () => AddPageView(),
+      binding: AddPageBinding(),
     ),
   ];
 }

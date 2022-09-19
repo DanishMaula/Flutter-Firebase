@@ -1,20 +1,36 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-
+ 
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  Stream<QuerySnapshot<Object?>> streamData() {
+    CollectionReference products = firestore.collection('products');
+    return products.snapshots();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
 
-  @override
-  void onClose() {}
-  void increment() => count.value++;
+
+   void deleteProduct(String docId) async {
+    DocumentReference docRef = firestore.collection('products').doc(docId);
+    try {
+      Get.defaultDialog(
+          title: 'Yakin ngab?',
+          middleText: 'Are you sure to delete this product?',
+          textConfirm: "Yes",
+          textCancel: 'No',
+          onConfirm: () async {
+            await docRef.delete();
+            Get.back();
+          });
+    } catch (e) {
+      print('Error : $e');
+      Get.defaultDialog(
+          title: 'Error',
+          middleText: 'Failed to delete product',
+          textConfirm: "Ok");
+    }
+  }
 }
+
+
