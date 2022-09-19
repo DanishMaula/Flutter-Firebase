@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import 'package:latihan_firebase1/app/modules/add_page/bindings/add_page_binding.dart';
 import 'package:latihan_firebase1/app/modules/add_page/views/add_page_view.dart';
+import 'package:latihan_firebase1/app/modules/edit_page/bindings/edit_page_binding.dart';
+import 'package:latihan_firebase1/app/modules/edit_page/views/edit_page_view.dart';
 import 'package:latihan_firebase1/app/modules/home/bindings/home_binding.dart';
 import 'package:latihan_firebase1/app/modules/home/views/home_view.dart';
 import 'package:latihan_firebase1/app/modules/login/bindings/login_binding.dart';
@@ -43,6 +45,11 @@ class AppPages {
       name: _Paths.ADD_PAGE,
       page: () => AddPageView(),
       binding: AddPageBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDIT_PAGE,
+      page: () => EditPageView(),
+      binding: EditPageBinding(),
     ),
   ];
 }

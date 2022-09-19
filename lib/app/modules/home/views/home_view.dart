@@ -28,12 +28,21 @@ class HomeView extends GetView<HomeController> {
             return ListView.builder(
                 itemCount: listAllDoc.length,
                 itemBuilder: (context, index) => ListTile(
+                  onTap: () => Get.toNamed(Routes.EDIT_PAGE,
+                   arguments: listAllDoc[index].id),
+
                   title: Text(
-                    "${(listAllDoc[index].data() as Map<String, dynamic>)['name']}'"
+                    "${(listAllDoc[index].data() as Map<String, dynamic>)['name']}"
                   ),
                   subtitle: Text(
                     'Rp. ${(listAllDoc[index].data() as Map<String, dynamic>)['price']}'
                   ),
+                  trailing: IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () => 
+                            controller.deleteProduct(listAllDoc[index].id),
+                      ),
+                      
                 ),
                 );
           }
@@ -41,7 +50,7 @@ class HomeView extends GetView<HomeController> {
         },
       ),
 
-      
+
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () => Get.toNamed(Routes.ADD_PAGE),
