@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 import 'package:get/get.dart';
 import 'package:latihan_firebase1/app/routes/app_pages.dart';
@@ -51,11 +52,23 @@ class HomeView extends GetView<HomeController> {
       ),
 
 
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () => Get.toNamed(Routes.ADD_PAGE),
+      floatingActionButton: SpeedDial(
+        animatedIcon: AnimatedIcons.menu_close,
+        children: [
+          SpeedDialChild(
+            child: Icon(Icons.add),
+            onTap: () => Get.toNamed(Routes.ADD_PAGE),
+            label :'Add item',
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.upload_file),
+            onTap: () => controller.uploadFile(),
+            label :'Upload a file',
+          )
+        ],
       ),
-    );
+      );
+
   }
 }
 

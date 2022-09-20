@@ -1,10 +1,22 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  //Firebase storage
+  FirebaseStorage storage = FirebaseStorage.instance;
 
+  void akses() async {
+    var ref = storage.ref('Hello.txt');
+
+    ref.putString('Hello world');
+  }
+
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
   Stream<QuerySnapshot<Object?>> streamData() {
     CollectionReference products = firestore.collection('products');
     return products.snapshots();
@@ -32,6 +44,26 @@ class HomeController extends GetxController {
     }
   }
 
+  void uploadFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+    if (result != null) {
+      File file = File(result.files.single.path!);
+      print(file);
+
+      String fileName = result.files.first.name;
+      String ext = result.files.first.extension!;
+
+      try {
+        await FirebaseStorage.instance.ref('${fileName}.${ext}').putFile(file);
+        print('success upload file');
+      } on FirebaseException catch (e) {
+        print(e);
+      }
+      // User canceled the picker
+      print('cancel file upload');
+    }
+  }
+
   
 }
-

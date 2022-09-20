@@ -9,8 +9,11 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: 4.6.5
   firebase_core: 1.22.0
+  flutter_speed_dial: ^6.0.0
   firebase_auth: 3.8.0
   cloud_firestore: 3.4.6
+  firebase_storage: 10.3.8
+  file_picker: 5.2.0
   flutter: 
     sdk: flutter
 
